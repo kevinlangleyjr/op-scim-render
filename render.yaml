@@ -14,8 +14,6 @@ services:
           type: redis
           name: scim-redis
           property: connectionString
-      - key: OP_TLS_DOMAIN
-        value: hostport
   # A Redis instance
   - type: redis
     name: scim-redis
