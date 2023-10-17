@@ -1,0 +1,26 @@
+services:
+  # A Docker web service
+  - type: web
+    name: scim-bridge
+    runtime: image
+    image:
+      url: docker.io/1password/scim:latest
+    region: oregon # optional (defaults to oregon)
+    plan: standard # optional (defaults to starter instance type)
+    healthCheckPath: /
+    envVars:
+      - key: OP_REDIS_URL
+        fromService:
+          type: redis
+          name: lightning
+          property: connectionString
+      - key: OP_TLS_DOMAIN
+        value: hostport
+  # A Redis instance
+  - type: redis
+    name: scim-redis
+    ipAllowList: # required
+      - source: 0.0.0.0/0
+        description: everywhere
+    plan: free # optional (defaults to starter instance type)
+    maxmemoryPolicy: allkeys-lru
