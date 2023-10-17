@@ -12,7 +12,7 @@ services:
       - key: OP_REDIS_URL
         fromService:
           type: redis
-          name: lightning
+          name: scim-redis
           property: connectionString
       - key: OP_TLS_DOMAIN
         value: hostport
